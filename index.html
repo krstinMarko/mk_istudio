@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;700;900&family=Roboto:wght@300;400&display=swap');
-       
+      
         :root {
             --primary-glow: #00ffff;
             --secondary-glow: #ff00ff;
@@ -18,13 +18,13 @@
             --text-secondary: rgba(255, 255, 255, 0.7);
             --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-       
+      
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-       
+      
         body {
             background: var(--bg-dark);
             color: var(--text-primary);
@@ -33,7 +33,7 @@
             line-height: 1.6;
             position: relative;
         }
-       
+      
         #vanta-bg {
             position: fixed;
             top: 0;
@@ -43,14 +43,14 @@
             z-index: -1;
             filter: blur(1.5px);
         }
-       
+      
         header {
             text-align: center;
             padding: 70px 20px 50px;
             position: relative;
             z-index: 1;
         }
-       
+      
         h1 {
             font-family: 'Orbitron', monospace;
             font-size: clamp(2.5rem, 10vw, 4.5rem);
@@ -64,12 +64,12 @@
             letter-spacing: 1.8px;
             line-height: 1.1;
         }
-       
+      
         @keyframes glow {
             from { text-shadow: 0 0 18px var(--primary-glow); }
             to { text-shadow: 0 0 45px var(--secondary-glow); }
         }
-       
+      
         .description {
             max-width: 800px;
             margin: 0 auto;
@@ -80,12 +80,12 @@
             font-weight: 300;
             animation: fadeIn 1.5s ease-out;
         }
-       
+      
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 0.88; transform: translateY(0); }
         }
-       
+      
         .artists-section {
             padding: 50px 15px;
             position: relative;
@@ -93,7 +93,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-       
+      
         .carousel-container {
             position: relative;
             overflow: hidden;
@@ -103,12 +103,16 @@
             backdrop-filter: blur(10px);
             margin: 0 auto;
         }
-       
+      
         .carousel-inner {
             display: flex;
             transition: var(--transition);
         }
-       
+
+        .carousel-inner.dragging {
+            transition: none;
+        }
+      
         .carousel-item {
             flex: 0 0 100%;
             padding: 35px 20px;
@@ -120,14 +124,14 @@
             min-height: 420px;
             transition: var(--transition);
         }
-       
+      
         .artist-img-wrapper {
             position: relative;
             width: clamp(130px, 32vw, 210px);
             height: clamp(130px, 32vw, 210px);
             margin: 0 auto 18px;
         }
-       
+      
         .artist-img {
             width: 100%;
             height: 100%;
@@ -139,12 +143,12 @@
             position: relative;
             z-index: 1;
         }
-       
+      
         .carousel-item:hover .artist-img {
             transform: scale(1.08);
             box-shadow: 0 0 65px rgba(255, 0, 255, 0.55);
         }
-       
+      
         .artist-img-placeholder {
             position: absolute;
             top: 0; left: 0;
@@ -161,12 +165,12 @@
             opacity: 1;
             transition: opacity 0.4s ease;
         }
-       
+      
         .artist-img.loaded + .artist-img-placeholder {
             opacity: 0;
             pointer-events: none;
         }
-       
+      
         .artist-handle {
             font-family: 'Orbitron', monospace;
             font-size: clamp(1.6rem, 5.5vw, 2.5em);
@@ -176,7 +180,7 @@
             text-shadow: 0 0 18px var(--primary-glow);
             letter-spacing: 1.1px;
         }
-       
+      
         .buttons {
             display: flex;
             flex-direction: column;
@@ -185,7 +189,7 @@
             width: 100%;
             max-width: 250px;
         }
-       
+      
         .btn {
             padding: 13px 28px;
             border: none;
@@ -202,34 +206,34 @@
             font-size: clamp(0.95rem, 3.2vw, 1.15em);
             box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
         }
-       
+      
         .btn-x {
             background: linear-gradient(45deg, #1da1f2, #0d8bd9);
             color: white;
         }
-       
+      
         .btn-x:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 30px rgba(29, 161, 242, 0.45);
         }
-       
+      
         .btn-spotify {
             background: linear-gradient(45deg, #1db954, #1ed760);
             color: white;
         }
-       
+      
         .btn-spotify:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 30px rgba(29, 185, 84, 0.45);
         }
-       
+      
         .carousel-controls {
             display: flex;
             justify-content: center;
             gap: 18px;
             margin-top: 28px;
         }
-       
+      
         .carousel-btn {
             background: transparent;
             border: 2px solid var(--primary-glow);
@@ -244,14 +248,14 @@
             align-items: center;
             justify-content: center;
         }
-       
+      
         .carousel-btn:hover {
             background: var(--primary-glow);
             color: var(--bg-dark);
             transform: scale(1.2);
             box-shadow: 0 0 22px var(--primary-glow);
         }
-       
+      
         .contact-section {
             padding: 70px 20px;
             text-align: center;
@@ -259,7 +263,7 @@
             position: relative;
             z-index: 1;
         }
-       
+      
         .contact-title {
             font-family: 'Orbitron', monospace;
             font-size: clamp(2rem, 7vw, 3.2em);
@@ -268,7 +272,7 @@
             text-shadow: 0 0 22px var(--secondary-glow);
             animation: glow 2s ease-in-out infinite alternate;
         }
-       
+      
         .contact-buttons {
             display: flex;
             flex-direction: column;
@@ -277,31 +281,31 @@
             max-width: 300px;
             margin: 0 auto;
         }
-       
+      
         .btn-contact {
             padding: 16px 38px;
             font-size: clamp(1rem, 3.5vw, 1.25em);
             min-width: 190px;
             border-radius: 50px;
         }
-       
+      
         .btn-dm {
             background: linear-gradient(45deg, #1da1f2, #0d8bd9);
             color: white;
             box-shadow: 0 0 22px rgba(29, 161, 242, 0.28);
         }
-       
+      
         .btn-email {
             background: linear-gradient(45deg, #ea4335, #dd4b39);
             color: white;
             box-shadow: 0 0 22px rgba(234, 67, 53, 0.28);
         }
-       
+      
         .btn-contact:hover {
             transform: translateY(-5px) scale(1.07);
             box-shadow: 0 16px 40px rgba(0, 255, 255, 0.35);
         }
-       
+      
         footer {
             text-align: center;
             padding: 32px;
@@ -310,7 +314,7 @@
             position: relative;
             z-index: 1;
         }
-       
+      
         /* Desktop: 5 items visible */
         @media (min-width: 769px) {
             .carousel-inner {
@@ -343,7 +347,7 @@
 </head>
 <body>
     <div id="vanta-bg"></div>
-   
+  
     <header>
         <h1>MK iSTUDIO</h1>
         <p class="description">
@@ -352,7 +356,7 @@
             blending futuristic beats with ethereal vocals in a symphony of innovation and creativity.
         </p>
     </header>
-   
+  
     <section class="artists-section">
         <div class="carousel-container">
             <div class="carousel-inner" id="carouselInner">
@@ -367,7 +371,7 @@
                         <a href="https://open.spotify.com/artist/0i5s91zcWVWyEehzWtjWTv?si=d0ORjD75SSeDr0C0Nb4Rlg" class="btn btn-spotify" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
                     </div>
                 </div>
-               
+              
                 <div class="carousel-item">
                     <div class="artist-img-wrapper">
                         <img src="hellab3at.jpg" alt="@hellab3at" class="artist-img" onload="this.classList.add('loaded')">
@@ -379,7 +383,7 @@
                         <a href="https://open.spotify.com/artist/2ZiI2Q7A8Mj58tKoFOpXID?si=CA-pwo46R8-xqI_jXENwuA" class="btn btn-spotify" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
                     </div>
                 </div>
-               
+              
                 <div class="carousel-item">
                     <div class="artist-img-wrapper">
                         <img src="lofr3q.jpg" alt="@lofr3q" class="artist-img" onload="this.classList.add('loaded')">
@@ -391,7 +395,7 @@
                         <a href="https://open.spotify.com/artist/5buDEvC0hlzZRNIoqO1Oti?si=dm6zP6u9RTSrvjeBx-64fQ" class="btn btn-spotify" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
                     </div>
                 </div>
-               
+              
                 <div class="carousel-item">
                     <div class="artist-img-wrapper">
                         <img src="real_l4ra.jpg" alt="@real_l4ra" class="artist-img" onload="this.classList.add('loaded')">
@@ -403,7 +407,7 @@
                         <a href="https://open.spotify.com/artist/1JLsFRgiySM0OJ6guo4zyE?si=JqIWxj2cQSSX8iBIMLCQoA" class="btn btn-spotify" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
                     </div>
                 </div>
-               
+              
                 <div class="carousel-item">
                     <div class="artist-img-wrapper">
                         <img src="real_lum1.jpg" alt="@real_lum1" class="artist-img" onload="this.classList.add('loaded')">
@@ -422,7 +426,7 @@
             <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
-   
+  
     <section class="contact-section">
         <h2 class="contact-title">Contact MK iSTUDIO</h2>
         <p style="font-size: clamp(1rem, 3.2vw, 1.25em); margin-bottom: 28px; opacity: 0.85;">For info, collabs, or inquiries</p>
@@ -431,11 +435,11 @@
             <a href="mailto:mk.istudio1@gmail.com" class="btn btn-contact btn-email"><i class="fas fa-envelope"></i> Email Us</a>
         </div>
     </section>
-   
+  
     <footer>
         <p>© 2025 MK iSTUDIO. All rights virtual. <i class="fas fa-rocket" style="color: var(--primary-glow); margin-left: 8px;"></i></p>
     </footer>
-   
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <script>
@@ -456,51 +460,40 @@
             spacing: 15.00,
             showDots: true
         });
-       
+      
         let currentIndex = 0;
         const totalItems = 5;
         const carouselInner = document.getElementById('carouselInner');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-       
+      
         function updateCarousel() {
             const isMobile = window.innerWidth < 769;
             const slidePercent = isMobile ? 100 : 20;
             const offset = currentIndex * slidePercent;
             carouselInner.style.transform = `translateX(-${offset}%)`;
         }
-       
+      
         prevBtn.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + totalItems) % totalItems;
             updateCarousel();
         });
-       
+      
         nextBtn.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % totalItems;
             updateCarousel();
         });
-       
-        // Auto-slide
-        let autoSlide = setInterval(() => nextBtn.click(), 3000);
-       
-        // Pause on interaction
-        const pauseAuto = () => clearInterval(autoSlide);
-        const resumeAuto = () => autoSlide = setInterval(() => nextBtn.click(), 3000);
-       
-        carouselInner.addEventListener('mouseenter', pauseAuto);
-        carouselInner.addEventListener('mouseleave', resumeAuto);
-        carouselInner.addEventListener('touchstart', pauseAuto, { passive: true });
-        carouselInner.addEventListener('touchend', resumeAuto);
-       
-        // Swipe
+      
+        // Swipe for touch
         let startX = 0;
         let isDragging = false;
+      
         carouselInner.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isDragging = true;
-            pauseAuto();
+            carouselInner.classList.add('dragging');
         }, { passive: true });
-       
+      
         carouselInner.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const diffX = startX - e.touches[0].clientX;
@@ -508,27 +501,74 @@
             const base = isMobile ? currentIndex * 100 : currentIndex * 20;
             carouselInner.style.transform = `translateX(calc(-${base}% - ${diffX}px))`;
         }, { passive: true });
-       
+      
         carouselInner.addEventListener('touchend', (e) => {
             if (!isDragging) return;
             const endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-            if (Math.abs(diff) > 70) {
-                if (diff > 0) nextBtn.click();
-                else prevBtn.click();
-            } else {
-                updateCarousel();
+            const isMobile = window.innerWidth < 769;
+            const visibleItems = isMobile ? 1 : 5;
+            const itemWidth = window.innerWidth / visibleItems;
+            const threshold = itemWidth * 0.3;
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                } else {
+                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                }
             }
+            carouselInner.classList.remove('dragging');
+            updateCarousel();
             isDragging = false;
-            resumeAuto();
         });
-       
+      
+        // Mouse drag
+        carouselInner.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startX = e.clientX;
+            isDragging = true;
+            carouselInner.classList.add('dragging');
+        });
+      
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const diffX = startX - e.clientX;
+            const isMobile = window.innerWidth < 769;
+            const base = isMobile ? currentIndex * 100 : currentIndex * 20;
+            carouselInner.style.transform = `translateX(calc(-${base}% - ${diffX}px))`;
+        });
+      
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            const endX = e.clientX;
+            const diff = startX - endX;
+            const isMobile = window.innerWidth < 769;
+            const visibleItems = isMobile ? 1 : 5;
+            const itemWidth = window.innerWidth / visibleItems;
+            const threshold = itemWidth * 0.3;
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                } else {
+                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                }
+            }
+            carouselInner.classList.remove('dragging');
+            updateCarousel();
+            isDragging = false;
+        });
+      
+        document.addEventListener('mouseleave', (e) => {
+            if (isDragging) {
+                carouselInner.classList.remove('dragging');
+                updateCarousel();
+                isDragging = false;
+            }
+        });
+      
         // Responsive
         window.addEventListener('resize', updateCarousel);
         window.addEventListener('load', updateCarousel);
     </script>
 </body>
-
 </html>
-
-
