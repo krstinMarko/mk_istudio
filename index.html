@@ -19,7 +19,6 @@
             --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --note-color: #00ff88;
             --beat-glow: #ff6b35;
-            --wave-glow: #ff00ff;
         }
       
         * {
@@ -28,16 +27,23 @@
             padding: 0;
         }
       
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+      
         body {
             background: var(--bg-dark);
             color: var(--text-primary);
             font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
             line-height: 1.6;
             position: relative;
             -webkit-font-smoothing: antialiased;
+            -webkit-overflow-scrolling: touch;
         }
       
+        /* FULL-SCREEN FIXED BACKGROUND */
         #vanta-bg {
             position: fixed;
             top: 0;
@@ -45,43 +51,27 @@
             width: 100%;
             height: 100vh;
             z-index: -1;
-            filter: blur(1px);
             pointer-events: none;
             touch-action: none;
+            will-change: transform;
         }
       
-        /* LIGHTER MOBILE ANIMATIONS */
+        /* LIGHT & FLUID NOTES */
         .music-note {
             position: fixed;
-            font-size: clamp(10px, 2vw, 16px);
+            font-size: clamp(9px, 1.8vw, 15px);
             color: var(--note-color);
-            text-shadow: 0 0 8px var(--note-color);
+            text-shadow: 0 0 6px var(--note-color);
             z-index: 0;
             pointer-events: none;
-            animation: floatLight 6s ease-in-out infinite;
-            opacity: 0.6;
-        }
-      
-        .beat-pulse {
-            position: fixed;
-            width: clamp(2px, 0.6vw, 4px);
-            height: clamp(2px, 0.6vw, 4px);
-            background: var(--beat-glow);
-            border-radius: 50%;
-            z-index: 0;
-            pointer-events: none;
-            animation: pulseLight 1.6s ease-in-out infinite;
-            box-shadow: 0 0 10px var(--beat-glow);
+            animation: floatLight 7s ease-in-out infinite;
+            opacity: 0.55;
+            transform-origin: center;
         }
       
         @keyframes floatLight {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(180deg); }
-        }
-      
-        @keyframes pulseLight {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.8); opacity: 0.3; }
+            50% { transform: translateY(-18px) rotate(180deg); }
         }
       
         header {
@@ -272,43 +262,38 @@
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
         }
       
-        /* CLEAN, MINIMAL ARROWS */
+        /* MINIMAL ARROWS */
         .carousel-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            width: 38px;
+            height: 38px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(0, 255, 255, 0.25);
             color: var(--primary-glow);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             z-index: 2;
             transition: all 0.3s ease;
             backdrop-filter: blur(6px);
-            opacity: 0.7;
+            opacity: 0.6;
         }
       
         .carousel-arrow:hover {
-            background: rgba(0, 255, 255, 0.2);
+            background: rgba(0, 255, 255, 0.15);
             border-color: var(--primary-glow);
             color: white;
             opacity: 1;
             transform: translateY(-50%) scale(1.15);
         }
       
-        .carousel-arrow.prev {
-            left: 8px;
-        }
-      
-        .carousel-arrow.next {
-            right: 8px;
-        }
+        .carousel-arrow.prev { left: 6px; }
+        .carousel-arrow.next { right: 6px; }
       
         .contact-section {
             padding: 60px 20px;
@@ -373,33 +358,14 @@
             font-size: 0.95em;
         }
       
-        /* Desktop */
         @media (min-width: 769px) {
-            .carousel-inner {
-                width: 500%;
-            }
-            .carousel-item {
-                flex: 0 0 20%;
-                min-height: 480px;
-                padding: 45px 25px;
-            }
-            .buttons {
-                flex-direction: row;
-                gap: 16px;
-                max-width: none;
-                justify-content: center;
-            }
-            .contact-buttons {
-                flex-direction: row;
-                gap: 20px;
-            }
-            .carousel-arrow {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-            .carousel-arrow.prev { left: -25px; }
-            .carousel-arrow.next { right: -25px; }
+            .carousel-inner { width: 500%; }
+            .carousel-item { flex: 0 0 20%; min-height: 480px; padding: 45px 25px; }
+            .buttons { flex-direction: row; gap: 16px; max-width: none; justify-content: center; }
+            .contact-buttons { flex-direction: row; gap: 20px; }
+            .carousel-arrow { width: 48px; height: 48px; font-size: 1.4rem; }
+            .carousel-arrow.prev { left: -24px; }
+            .carousel-arrow.next { right: -24px; }
         }
     </style>
 </head>
@@ -416,7 +382,6 @@
   
     <section class="artists-section">
         <div class="carousel-container">
-            <!-- Minimal, clean arrows -->
             <div class="carousel-arrow prev" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
             <div class="carousel-arrow next" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
             
@@ -503,7 +468,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <script>
-        // MOBILE: LIGHT & SWIPEABLE
+        // FIXED, VISIBLE, FLUID
         let vantaEffect;
         const initVanta = () => {
             const isMobile = window.innerWidth < 768;
@@ -511,7 +476,7 @@
             
             vantaEffect = VANTA.NET({
                 el: "#vanta-bg",
-                mouseControls: !isMobile,
+                mouseControls: false,
                 touchControls: false,
                 gyroControls: false,
                 minHeight: 200,
@@ -520,73 +485,68 @@
                 scaleMobile: isMobile ? 0.7 : 1.0,
                 color: 0x00ffff,
                 backgroundColor: 0x0a0a0a,
-                points: isMobile ? (isLowEnd ? 3 : 4) : 8,
-                maxDistance: isMobile ? 8 : 18,
-                spacing: isMobile ? 30 : 20,
+                points: isMobile ? (isLowEnd ? 4 : 5) : 10,
+                maxDistance: isMobile ? 12 : 22,
+                spacing: isMobile ? 26 : 18,
                 showDots: true,
-                speed: 0.5
+                speed: 0.6
             });
         };
 
-        // LIGHT MUSIC COSMOS
+        // MORE NOTES, LIGHT & SMOOTH
         class MusicCosmos {
             constructor() {
                 this.notes = [];
-                this.beats = [];
-                this.noteSymbols = ['♪', '♫', '♬'];
+                this.noteSymbols = ['♪', '♫', '♬', '♩'];
                 this.init();
             }
             
             init() {
-                for (let i = 0; i < 8; i++) {
-                    setTimeout(() => this.createNote(), i * 300);
+                for (let i = 0; i < 16; i++) {
+                    setTimeout(() => this.createNote(), i * 160);
                 }
-                setInterval(() => this.createNote(), 3000);
-                setInterval(() => this.createBeat(), 1500);
+                setInterval(() => {
+                    if (this.notes.length < 14) this.createNote();
+                }, 2000);
             }
             
             createNote() {
                 const note = document.createElement('div');
                 note.className = 'music-note';
                 note.innerHTML = this.noteSymbols[Math.floor(Math.random() * this.noteSymbols.length)];
-                note.style.left = Math.random() * 90 + 5 + '%';
-                note.style.top = Math.random() * 90 + 5 + '%';
+                note.style.left = Math.random() * 86 + 7 + '%';
+                note.style.top = Math.random() * 86 + 7 + '%';
+                const duration = 5 + Math.random() * 2.5;
+                note.style.animationDuration = `${duration}s`;
+                note.style.animationDelay = `${Math.random() * 0.8}s`;
                 document.body.appendChild(note);
                 this.notes.push(note);
-                setTimeout(() => this.remove(note, this.notes), 6000);
+                setTimeout(() => this.remove(note), duration * 1000 + 1000);
             }
             
-            createBeat() {
-                const beat = document.createElement('div');
-                beat.className = 'beat-pulse';
-                beat.style.left = Math.random() * 100 + '%';
-                beat.style.top = Math.random() * 100 + '%';
-                document.body.appendChild(beat);
-                this.beats.push(beat);
-                setTimeout(() => this.remove(beat, this.beats), 1600);
-            }
-            
-            remove(el, arr) {
-                const i = arr.indexOf(el);
-                if (i > -1) { arr.splice(i, 1); el.remove(); }
+            remove(el) {
+                const i = this.notes.indexOf(el);
+                if (i > -1) { this.notes.splice(i, 1); el.remove(); }
             }
         }
         
         const cosmos = new MusicCosmos();
 
-        // Resize
+        // RESIZE ONLY
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                if (vantaEffect) vantaEffect.destroy();
-                initVanta();
-            }, 150);
+                if (vantaEffect) vantaEffect.resize();
+            }, 200);
         });
 
-        initVanta();
+        // INIT ONCE
+        window.addEventListener('load', () => {
+            initVanta();
+        });
 
-        // CAROUSEL WITH SWIPE
+        // CAROUSEL
         let currentIndex = 0;
         const totalItems = 5;
         const carouselInner = document.getElementById('carouselInner');
